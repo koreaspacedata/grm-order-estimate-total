@@ -1,0 +1,13 @@
+{
+  "name": "grm-order-estimate-total",
+  "version": "1.0.0",
+  "description": "Estimate total price",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Korea Space Data",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "8.6.2"
+  }
+}

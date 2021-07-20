@@ -1,0 +1,71 @@
+const Ajv = require('ajv');
+
+const { productsSchema, partsSchema, optionsSchema } = require('./schemas');
+
+function estimateTotal(order) {
+
+  function validateSchema(schema, data) {
+    const ajv = new Ajv();
+    const validate = ajv.compile(schema);
+
+    if (!validate(data)) throw validate.errors;
+  }
+  
+  function sumProducts(products) {
+    try {
+      validateSchema(productsSchema, products);
+
+      const sum = products.reduce((sum, p) => {
+        const { product, unit } = p;
+        const price = product.volume_sale ?
+                        product.volume_sale_price :
+                        product.discounted_unit_price || product.unit_price;
+        return sum + price * unit;
+      }, 0);
+
+      return sum;
+
+    } catch {
+      throw 'Invalid products data';
+    }
+  }
+
+  function sumParts(parts) {
+    try {
+      validateSchema(partsSchema, parts);
+
+      const sum = parts.reduce((sum, p) => {
+        const { part, unit } = p;
+        const price = part.discounted_unit_price || part.unit_price;
+
+        return sum + price * unit;
+      }, 0);
+
+      return sum;
+    } catch {
+      throw 'Invalid parts data';
+    }
+  }
+
+  function sumOptions(options) {
+    try {
+      validateSchema(optionsSchema, options);
+
+      const sum = options.reduce((sum, o) => sum + o.price, 0);
+
+      return sum;
+    } catch {
+      throw 'Invalid options data';
+    }
+  }
+
+  const { products, parts, options } = order;
+  const productsTotal= sumProducts(products);
+  const partsTotal = sumParts(parts);
+  const optionsTotal= sumOptions(options);
+  const estimatedTotal = productsTotal + partsTotal + optionsTotal;
+
+  return !isNaN(estimatedTotal) ? estimatedTotal : 0;
+};
+
+module.exports = { estimateTotal };
