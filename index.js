@@ -20,7 +20,10 @@ function estimateTotal(order) {
         const price = product.volume_sale ?
                         product.volume_sale_price :
                         product.discounted_unit_price || product.unit_price;
-        return sum + price * unit;
+        const rowSum = product.volume_sale && (unit > 1) ?
+                        product.unit_price + 
+                        price * (unit - 1) : price * unit ;
+        return sum + rowSum;
       }, 0);
 
       return sum;
