@@ -17,12 +17,10 @@ function estimateTotal(order) {
 
       const sum = products.reduce((sum, p) => {
         const { product, unit } = p;
-        const price = product.volume_sale ?
-                        product.volume_sale_price :
-                        product.discounted_unit_price || product.unit_price;
+        const price = product.discounted_unit_price || product.unit_price;
         const rowSum = product.volume_sale && (unit > 1) ?
-                        product.unit_price + 
-                        price * (unit - 1) : price * unit ;
+                        (product.volume_sale_price * (unit - 1) ) + product.unit_price 
+                        : price * unit ;
         return sum + rowSum;
       }, 0);
 
