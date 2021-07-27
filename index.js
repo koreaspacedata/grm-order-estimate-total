@@ -25,9 +25,8 @@ function estimateTotal(order) {
       }, 0);
 
       return sum;
-
-    } catch {
-      throw 'Invalid products data';
+    } catch (e){
+      throw new Error(`${JSON.stringify(e)}`)
     }
   }
 
@@ -44,7 +43,7 @@ function estimateTotal(order) {
 
       return sum;
     } catch {
-      throw 'Invalid parts data';
+      throw new Error(`${JSON.stringify(e)}`)
     }
   }
 
@@ -56,7 +55,7 @@ function estimateTotal(order) {
 
       return sum;
     } catch {
-      throw 'Invalid options data';
+      throw new Error(`${JSON.stringify(e)}`)
     }
   }
 
