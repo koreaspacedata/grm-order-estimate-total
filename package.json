@@ -1,6 +1,6 @@
 {
   "name": "grm-order-estimate-total",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Estimate total price",
   "main": "index.js",
   "scripts": {
