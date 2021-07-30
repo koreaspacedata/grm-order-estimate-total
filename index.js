@@ -42,7 +42,7 @@ function estimateTotal(order) {
       }, 0);
 
       return sum;
-    } catch {
+    } catch (e) {
       throw new Error(`${JSON.stringify(e)}`)
     }
   }
@@ -54,7 +54,7 @@ function estimateTotal(order) {
       const sum = options.reduce((sum, o) => sum + o.price, 0);
 
       return sum;
-    } catch {
+    } catch (e) {
       throw new Error(`${JSON.stringify(e)}`)
     }
   }
