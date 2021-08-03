@@ -4,10 +4,14 @@
   "description": "Estimate total price",
   "main": "index.js",
   "scripts": {
+    "test": "jest"
   },
   "author": "Korea Space Data",
   "license": "ISC",
   "dependencies": {
     "ajv": "8.6.2"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }
