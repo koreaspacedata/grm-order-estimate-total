@@ -45,29 +45,16 @@ module.exports = {
     items: {
       type: 'object',
       properties: {
-        part: {
-          type: 'object',
-          properties: {
-            unit_price: {
-              type: 'integer',
-              minimum: 0
-            },
-            discounted_unit_priced: {
-              type: 'integer',
-              minimum: 0
-            },
-          },
-          required: [
-            'unit_price',
-            'discounted_unit_price'
-          ]
-        },
         unit: {
           type: 'integer',
           minimum: 1
-        }
+        },
+        price: {
+          type: 'integer',
+          minimum: 0
+        },
       },
-      required: ['part', 'unit']
+      required: ['price', 'unit']
     },
   },
 
