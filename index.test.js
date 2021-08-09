@@ -1,4 +1,4 @@
-const { validateSchema, sumParts } = require("./index");
+const { validateSchema, sumParts , sumProducts} = require("./index");
 const { productsSchema, partsSchema, optionsSchema } = require("./schemas");
 
 test("productsSchema check", () => {
@@ -51,3 +51,44 @@ test("sumParts check", () => {
   ];
   expect(sumParts(parts)).toBe(31000);
 });
+
+
+
+test("sumProducts check", () => {
+    const products = [
+        {
+            product: {
+              unit_price: 1000,
+              discounted_unit_price: 800,
+              volume_sale_price: 700,
+              volume_sale: false,
+            },
+            unit: 3,
+          },
+
+    ];
+    expect(sumProducts(products)).toBe(2400);
+  });
+  
+
+
+
+
+
+test("sumProducts check2", () => {
+    const products = [
+        {
+            product: {
+              unit_price: 1000,
+              discounted_unit_price: 600,
+              volume_sale_price: 700,
+              volume_sale: true
+             },
+            unit: 3,
+          },
+
+    ];
+    expect(sumProducts(products)).toBe(1800);
+  });
+  
+

@@ -16,10 +16,19 @@ function sumProducts(products) {
 
     const sum = products.reduce((sum, p) => {
       const { product, unit } = p;
-      const price = product.discounted_unit_price || product.unit_price;
-      const rowSum = product.volume_sale && (unit > 1) ?
-                      (product.volume_sale_price * (unit - 1) ) + product.unit_price 
-                      : price * unit ;
+      let rowSum = 0;
+      if(product.discounted_unit_price <= product.unit_price){
+        rowSum = product.discounted_unit_price * unit;
+      }else if(product.volume_sale && (unit > 1)){
+        rowSum = (product.volume_sale_price * (unit - 1) ) + product.unit_price;
+      }else{
+        rowSum = unit_price * unit ;
+      }
+      // const price = product.discounted_unit_price <= product.unit_price ? 
+      //               product.discounted_unit_price : product.unit_price;
+      // const rowSum = product.volume_sale && (unit > 1) ?
+      //                 (product.volume_sale_price * (unit - 1) ) + product.unit_price 
+      //                 : price * unit ;
       return sum + rowSum;
     }, 0);
 
